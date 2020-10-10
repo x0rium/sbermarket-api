@@ -13,7 +13,7 @@ POST https://api.sbermarket.ru/v2/sessions HTTP/1.1
 
 Используется классическая Basic авторизация `base64(email:password)` в заголовок
 
-Пример: `Authorization: Basic dHV4ZXJhQGdtYWlsLmNvbTo0MzE1MjU4Ng==`
+Пример: `Authorization: Basic ZW1haWw6cGFzc3dvcmQ==`
 
 `baseUrl` : `https://api.sbermarket.ru/v2/`
 
