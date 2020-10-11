@@ -1,0 +1,320 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>sbermarket-api</title>
+	<meta name="description" content="Documentation for sbermarket-api">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">sbermarket-api</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>sbermarket-api</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#sbermarket-api" id="sbermarket-api" style="color: inherit; text-decoration: none;">
+					<h1>sbermarket-api</h1>
+				</a>
+				<p>Неофициальный nodejs api-клиент для Сбермаркета. Для чего?</p>
+				<ul>
+					<li>просто по-фану</li>
+					<li>очень хочется  накидывать в корзину типовые товары быстро и без боли, прям скриптом)</li>
+					<li>поиск наилучших ценовых предложений по магазинам доступным в Сбермаркете</li>
+				</ul>
+				<p>К сожалению, официального публичного api не нашлось. Саппорт тоже ничего по этому поводу не ответил.</p>
+				<p><em>WARNING! Under construction.</em></p>
+				<a href="#установка" id="установка" style="color: inherit; text-decoration: none;">
+					<h3>Установка</h3>
+				</a>
+				<p><code>npm i sbermarket-api</code>
+					или
+				<code>yarn add sbermarket-api</code></p>
+				<a href="#использование" id="использование" style="color: inherit; text-decoration: none;">
+					<h3>Использование</h3>
+				</a>
+				<ol>
+					<li>Необходимо передать два параметра <code>email</code> и <code>password</code></li>
+					<li>Примеры выполнения кода можно найти в папке <code>example</code></li>
+				</ol>
+				<pre><code class="language-JavaScript">
+<span class="hljs-keyword">const</span> sbermarketApi= <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;sbermarket-api&quot;</span>);
+<span class="hljs-keyword">const</span> apiClient = <span class="hljs-keyword">new</span> sbermarketApi({<span class="hljs-attr">email</span>:<span class="hljs-string">&quot;asd.asd@asd.asd&quot;</span>, <span class="hljs-attr">password</span>:<span class="hljs-string">&quot;asdasd123&quot;</span>});
+
+<span class="hljs-comment">// логинимся</span>
+apiClient.login().then(<span class="hljs-function">(<span class="hljs-params">isValid</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (!isValid) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+
+  <span class="hljs-comment">// получить данные о текущем юзере</span>
+  apiClient.getUser().then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(data);
+  });
+
+  <span class="hljs-comment">// получить данные о текущем заказе, оно же корзина</span>
+  apiClient.getCurrentOrder().then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(data);
+  });
+
+  <span class="hljs-comment">// получить данные о магазине</span>
+  apiClient.getStore(<span class="hljs-number">251</span>).then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(data.store.location);
+  });
+
+  apiClient.search(<span class="hljs-number">251</span>, <span class="hljs-string">&quot;икра путина&quot;</span>).then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(data);
+  });
+
+
+});</code></pre>
+				<a href="#авторизация" id="авторизация" style="color: inherit; text-decoration: none;">
+					<h3>Авторизация</h3>
+				</a>
+				<p>POST <a href="https://api.sbermarket.ru/v2/sessions">https://api.sbermarket.ru/v2/sessions</a> HTTP/1.1</p>
+				<p>Используется классическая Basic авторизация <code>base64(email:password)</code> в заголовок</p>
+				<p>Пример: <code>Authorization: Basic ZW1haWw6cGFzc3dvcmQ==</code></p>
+				<p><code>baseUrl</code> : <code>https://api.sbermarket.ru/v2/</code></p>
+				<a href="#получение-данных-о-юзере" id="получение-данных-о-юзере" style="color: inherit; text-decoration: none;">
+					<h3>Получение данных о юзере</h3>
+				</a>
+				<p>GET <code>users/{{email}}</code></p>
+				<p>Название метода: <code>getUser()</code></p>
+				<p>Смотри подробнее в <a href="./docs/users.md">./docs/users.md</a></p>
+				<a href="#описание-поставщика" id="описание-поставщика" style="color: inherit; text-decoration: none;">
+					<h3>Описание поставщика</h3>
+				</a>
+				<p>GET <code>stores/{{storeId}}</code></p>
+				<p>Название метода: <code>getStore()</code></p>
+				<p>Смотри подробнее в <a href="docs/store.md">./docs/stores.md</a></p>
+				<a href="#корзина" id="корзина" style="color: inherit; text-decoration: none;">
+					<h3>Корзина</h3>
+				</a>
+				<p>GET <code>orders/current</code></p>
+				<p>Название метода: <code>getCurrentOrder()</code></p>
+				<p>Смотри подробнее в <a href="./docs/currentOrder.md">./docs/currentOrder.md</a></p>
+				<a href="#получение-категории" id="получение-категории" style="color: inherit; text-decoration: none;">
+					<h3>Получение категории</h3>
+				</a>
+				<p>GET <code>taxons/{{taxonId}}?sid={{storeId}}</code></p>
+				<p>Название метода: <code>getCategory()</code></p>
+				<p>Смотри подробнее в <a href="docs/categoryProducts.md">./docs/taxons.md</a></p>
+				<a href="#получение-товара" id="получение-товара" style="color: inherit; text-decoration: none;">
+					<h3>Получение товара</h3>
+				</a>
+				<p>GET <code>products/{{productId}}</code></p>
+				<p>Название метода: <code>getProduct()</code></p>
+				<p>Смотри подробнее в <a href="./docs/product.md">./docs/product.md</a></p>
+				<a href="#добавление-товара-в-корзину" id="добавление-товара-в-корзину" style="color: inherit; text-decoration: none;">
+					<h3>Добавление товара в корзину</h3>
+				</a>
+				<p>POST <code>line_items</code></p>
+				<p>Название метода: <code>addToOrder(номер заказа, id продукта, количество)</code></p>
+				<p>Смотри подробнее в <a href="./docs/line_items.md">./docs/line_items.md</a></p>
+				<a href="#поиск-товара" id="поиск-товара" style="color: inherit; text-decoration: none;">
+					<h3>Поиск товара</h3>
+				</a>
+				<p>GET <code>products?page=1&amp;per_page=20&amp;q=%D0%92%D0%BE%D0%B4%D0%BA%D0%B0&amp;sid={{storeId}}</code></p>
+				<p>Название метода: <code>search(id магазина, поисковый запрос, количество продуктов на страницу, номер страницы)</code></p>
+				<p>Смотри подробнее в <a href="./docs/products.md">./docs/products.md</a></p>
+				<p>##TODO:</p>
+				<ul>
+					<li><input checked="" disabled="" type="checkbox"> выровнять readme.md</li>
+					<li><input disabled="" type="checkbox"> получение доступных магазинов</li>
+					<li><input disabled="" type="checkbox"> кэширование дерева</li>
+					<li><input disabled="" type="checkbox"> кэширование токена</li>
+					<li><input disabled="" type="checkbox"> эмуляция гео</li>
+					<li><input checked="" disabled="" type="checkbox"> типизировать все запросы</li>
+					<li><input checked="" disabled="" type="checkbox"> поиск товаров и категорий</li>
+					<li><input disabled="" type="checkbox"> тесты</li>
+				</ul>
+				<a href="#disclaimer" id="disclaimer" style="color: inherit; text-decoration: none;">
+					<h2>Disclaimer</h2>
+				</a>
+				<p>Автор сего кода не несет никакой ответственности.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_apiclient_.html">&quot;src/api<wbr>Client&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_axiosconfig_.html">&quot;src/axios<wbr>Config&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_logger_.html">&quot;src/logger&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_middlewares_onrequestfulfilled_.html">&quot;src/middlewares/on<wbr>Request<wbr>Fulfilled&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_middlewares_onrequestrejected_.html">&quot;src/middlewares/on<wbr>Request<wbr>Rejected&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_middlewares_onresponsefulfilled_.html">&quot;src/middlewares/on<wbr>Response<wbr>Fulfilled&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_middlewares_onresponserejected_.html">&quot;src/middlewares/on<wbr>Response<wbr>Rejected&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_address_.html">&quot;src/types/address&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_alert_.html">&quot;src/types/alert&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_credentials_.html">&quot;src/types/credentials&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_currentproduct_.html">&quot;src/types/current<wbr>Product&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_facet_.html">&quot;src/types/facet&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_lineitem_.html">&quot;src/types/line<wbr>Item&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_location_.html">&quot;src/types/location&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_meta_.html">&quot;src/types/meta&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_nextdelivery_.html">&quot;src/types/next<wbr>Delivery&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_operationaltime_.html">&quot;src/types/operational<wbr>Time&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_order_.html">&quot;src/types/order&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_product_.html">&quot;src/types/product&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_products_.html">&quot;src/types/products&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_property_.html">&quot;src/types/property&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_retailer_.html">&quot;src/types/retailer&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_session_.html">&quot;src/types/session&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_shipment_.html">&quot;src/types/shipment&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_sort_.html">&quot;src/types/sort&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_store_.html">&quot;src/types/store&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_stores_.html">&quot;src/types/stores&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_taxon_.html">&quot;src/types/taxon&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_taxons_.html">&quot;src/types/taxons&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_user_.html">&quot;src/types/user&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_src_types_zone_.html">&quot;src/types/zone&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
