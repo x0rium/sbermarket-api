@@ -33,7 +33,12 @@
     "pino-pretty": "^4.3.0",
     "qs": "^6.9.4"
   },
+  "np": {
+    "yarn": true,
+    "contents": "dist"
+  },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }
