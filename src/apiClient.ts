@@ -13,10 +13,13 @@ import { Order } from "order";
 import { CurrentProduct } from "currentProduct";
 import { LineItem } from "lineItem";
 import { Products } from "products";
+import { Stores } from "stores";
+import { Taxons } from "taxons";
 
 enum apiClientMethods {
   GET = "GET",
   POST = "POST",
+  DELETE = "DELETE",
 }
 
 class ApiClient {
@@ -78,11 +81,34 @@ class ApiClient {
   }
 
   /**
+   * Получить список магазинов доступных в текущей локации
+   */
+  public async getStores(): Promise<Stores> {
+    return await this._req<Stores>(
+      `stores?lon=${this.credentials.longitude}&lat=${this.credentials.latitude}`,
+      apiClientMethods.GET,
+      {}
+    );
+  }
+
+  /**
    * Получить текущий заказ/корзину
    */
   public async getCurrentOrder(): Promise<{ order: Order }> {
     return await this._req<{ order: Order }>(
       "orders/current",
+      apiClientMethods.GET,
+      {}
+    );
+  }
+
+  /**
+   * Получить все категории магазина
+   * @param storeId
+   */
+  public async getCategories(storeId: number): Promise<Taxons> {
+    return await this._req<Taxons>(
+      `taxons?sid=${storeId}`,
       apiClientMethods.GET,
       {}
     );
@@ -141,7 +167,21 @@ class ApiClient {
   }
 
   /**
-   * Искать по товарам/ категориям с пагинацией
+   * Удалить предложение из корзины
+   * @param lineItemId
+   */
+  public async removeFromOrder(
+    lineItemId: number
+  ): Promise<{ line_item: LineItem }> {
+    return await this._req<{ line_item: LineItem }>(
+      `line_items/${lineItemId}`,
+      apiClientMethods.DELETE,
+      {}
+    );
+  }
+
+  /**
+   * Искать по товарам с пагинацией в конкретном магазине
    * @param storeId - id магазина
    * @param query - поисковый запрос
    * @param perPage - количество продуктов на одной странице

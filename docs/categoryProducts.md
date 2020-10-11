@@ -1,11 +1,11 @@
 ### Получение товаров в категории
 GET https://api.sbermarket.ru/v2/products?sid=251&tid=6334&page=1 HTTP/1.1
 -  sid - store Id, id поставщика (на данный момент 251 - Ашан)
--  tid - taxon Id, id категории 
+-  tid - taxon Id, id категории
 -  page - номер страницы
 
 Ответ:
-```JSON 
+```JSON
 {
   "products": [
     {
@@ -223,3 +223,5 @@ GET https://api.sbermarket.ru/v2/products?sid=251&tid=6334&page=1 HTTP/1.1
   ]
 }
 ```
+
+

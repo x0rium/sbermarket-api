@@ -1,12 +1,13 @@
 # sbermarket-api
-Неофициальный nodejs api-клиент для Сбермаркета. Для чего?
-- просто по-фану
-- очень хочется  накидывать в корзину типовые товары быстро и без боли, прям скриптом)
-- поиск наилучших ценовых предложений по магазинам доступным в Сбермаркете
+Неофициальный nodejs api-клиент для Сбермаркета, полностью на typescript. Для чего?
+- просто по-фану;
+- очень хочется  накидывать в корзину типовые товары быстро и без боли, прям скриптом; :-)
+- поиск наилучших ценовых предложений по магазинам доступным в Сбермаркете;
 
 К сожалению, официального публичного api не нашлось. Саппорт тоже ничего по этому поводу не ответил.
 
 *WARNING! Under construction.*
+
 
 ### Установка
 ```npm i sbermarket-api```
@@ -14,13 +15,20 @@
 ```yarn add sbermarket-api```
 
 ### Использование
-1. Необходимо передать два параметра `email` и `password`
-3. Примеры выполнения кода можно найти в папке `example`
+1. Необходимо передать Credentials `email`,`password`,`latitude`,`longitude`;
+3. Примеры выполнения кода можно найти в папке `example`;
 
 ```JavaScript
 
 const sbermarketApi= require("sbermarket-api");
-const apiClient = new sbermarketApi({email:"asd.asd@asd.asd", password:"asdasd123"});
+const credentials = {
+  email: "asd@asd.asd", //email
+  password: "123123123", //пароль
+  latitude: 45.0001, // широта
+  longitude: 36.0001 // долгота
+}
+// По широте и долготе сервак сбермаркета определяет какие магазины доступны.
+const apiClient = new sbermarketApi(credentials);
 
 // логинимся
 apiClient.login().then((isValid) => {
@@ -52,81 +60,148 @@ apiClient.login().then((isValid) => {
 
 ### Авторизация
 
-POST https://api.sbermarket.ru/v2/sessions HTTP/1.1
-
-Используется классическая Basic авторизация `base64(email:password)` в заголовок
+У ребят используется классическая Basic авторизация `base64(email:password)` в заголовок `Authorization`.
 
 Пример: `Authorization: Basic ZW1haWw6cGFzc3dvcmQ==`
 
-`baseUrl` : `https://api.sbermarket.ru/v2/`
+baseUrl : `https://api.sbermarket.ru/v2/`
+
+Для логина есть готовый метод `login()`
 
 
-### Получение данных о юзере
-GET `users/{{email}}`
+### Методы
 
-Название метода: `getUser()`
+| Название метода| Что делает? |
+| ------------- |:-------------|
+|[getUser](#getUser) | Получить данные о юзере|
+|[getStore](#getStore) |Получить данные о магазине|
+|[getStores](#getStores)|Получить список магазинов доступных в текущей локации|
+|[getCurrentOrder](#getCurrentOrder) |Получить текущий заказ/корзину|
+|[getCategories](#getCategories) |Получить все категории магазина|
+|[getCategoryProducts](#getCategoryProducts) |Получить список продуктов в категории|
+|[getProduct](#getProduct) |Получить информацию о товаре|
+|[addToOrder](#addToOrder) |Добавить товар в заказ/корзину|
+|[removeFromOrder](#removeFromOrder) |Удалить предложение из корзины|
+|[search](#search) |Искать по товарам с пагинацией в конкретном магазине|
 
-Смотри подробнее в [./docs/users.md](./docs/users.md)
+#### getUser
+ Получить информацию о текущем юзере.
+```JavaScript
+ apiClient.getUser().then((data) => {
+    console.log(data);
+ });
+```
 
-### Описание поставщика
-GET `stores/{{storeId}}`
+#### getStore
+Получение данных о магазине.
+```JavaScript
+ apiClient.getStore(251).then((data) => {
+    console.log(data);
+ });
+```
 
-Название метода: `getStore()`
+#### getStores
+Получить список магазинов доступных в текущей локации.
+```JavaScript
+ apiClient.getStores().then((data) => {
+    console.log(data);
+ });
+```
+
+#### getCurrentOrder
+Получить текущий заказ/корзину.
+```JavaScript
+ apiClient.getCurrentOrder().then((data) => {
+    console.log(data);
+ });
+```
+
+#### getCategories
+Получить все категории магазина.
+
+Принимает параметр:
+ 1. `storeId` - id магазина;
+```JavaScript
+ apiClient.getCategories(251).then((data) => {
+    console.log(data);
+ });
+```
+
+#### getCategoryProducts
+Получить список продуктов в категории.
+
+Принимает два параметра:
+1. `taxonId` - id категории;
+2. `storeId` - id магазина;
+```JavaScript
+ apiClient.getCategoryProducts(1145,251).then((data) => {
+    console.log(data);
+ });
+```
 
 
-Смотри подробнее в [./docs/stores.md](./docs/stores.md)
+#### getProduct
+Получить информацию о товаре.
+
+Принимает один параметр:
+1. `productId` - id продукта;
+```JavaScript
+ apiClient.getProduct(666777).then((data) => {
+    console.log(data);
+ });
+```
+
+#### addToOrder
+Добавить товар в заказ/корзину.
+
+Принимает три параметра:
+1. `orderNumber` - номер заказа;
+2. `productId` - id продукта;
+3. `quantity` - количество;
+```JavaScript
+ apiClient.getProduct("R*********",666777,1).then((data) => {
+    console.log(data);
+ });
+```
+Возвращает: `line_item`, как я понял конкретное актуальное торговое предложение.
+
+#### removeFromOrder
+Удалить предложение из корзины.
+
+Принимает один параметр:
+1. `lineItemId` - id торгового предложения;
+```JavaScript
+ apiClient.removeFromOrder(1231231).then((data) => {
+    console.log(data);
+ });
+```
 
 
-### Корзина
-GET `orders/current`
+#### search
+Искать по товарам с пагинацией в конкретном магазине.
 
-Название метода: `getCurrentOrder()`
-
-Смотри подробнее в [./docs/currentOrder.md](./docs/currentOrder.md)
-
-
-### Получение категории
-GET `taxons/{{taxonId}}?sid={{storeId}}`
-
-Название метода: `getCategory()`
-
-Смотри подробнее в [./docs/taxons.md](./docs/taxons.md)
-
-
-### Получение товара
-GET `products/{{productId}}`
-
-Название метода: `getProduct()`
-
-Смотри подробнее в [./docs/product.md](./docs/product.md)
+Принимает четыре параметра:
+1. `storeId` - id магазина;
+2. `query` - поисковый запрос;
+3. `perPage` - количество продуктов на одной странице;
+4. `page` - номер страницы, отсчет от 1;
+```JavaScript
+ apiClient.removeFromOrder(1231231).then((data) => {
+    console.log(data);
+ });
+```
 
 
-### Добавление товара в корзину
-POST `line_items`
-
-Название метода: `addToOrder(номер заказа, id продукта, количество)`
-
-Смотри подробнее в [./docs/line_items.md](./docs/line_items.md)
-
-
-### Поиск товара
-GET `products?page=1&per_page=20&q=%D0%92%D0%BE%D0%B4%D0%BA%D0%B0&sid={{storeId}}`
-
-Название метода: `search(id магазина, поисковый запрос, количество продуктов на страницу, номер страницы)`
-
-Смотри подробнее в [./docs/products.md](./docs/products.md)
-
-
-##TODO:
+## TODO:
 - [x] выровнять readme.md
-- [ ] получение доступных магазинов
+- [X] получение доступных магазинов
 - [ ] кэширование дерева
 - [ ] кэширование токена
-- [ ] эмуляция гео
+- [X] эмуляция гео
 - [x] типизировать все запросы
 - [x] поиск товаров и категорий
 - [ ] тесты
 
 
 ## Disclaimer
-Автор сего кода не несет никакой ответственности.
+Автор сего кода не несет никакой ответственности. Использовать только на свой страх и риск, все права пренадлежат владельцам прав.

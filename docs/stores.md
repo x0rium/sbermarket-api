@@ -1,278 +1,208 @@
-## Описание поставщика / магазина
-GET https://api.sbermarket.ru/v2/stores/251
+GET https://api.sbermarket.ru/v2/stores?lon=33.0231&lat=45.006482
 
 ```JSON
 {
-  "store": {
-    "id": 251,
-    "name": "Ашан, Краснодар, ул. Уральская",
-    "zones": [
-      [
-        {
-          "lon": 39.0328665,
-          "lat": 45.0357565
-        },
-        {
-          "lon": 39.0315059,
-          "lat": 45.035491
-        },
-        {
-          "lon": 39.0300111,
-          "lat": 45.0350852
-        },
-        {
-          "lon": 39.0273918,
-          "lat": 45.0340462
-        },
-        {
-          "lon": 39.0214347,
-          "lat": 45.0316154
-        },
-        {
-          "lon": 38.998686,
-          "lat": 45.0224215
-        },
-        {
-          "lon": 38.9877302,
-          "lat": 45.0173773
-        },
-        {
-          "lon": 38.9833044,
-          "lat": 45.0154918
-        },
-        {
-          "lon": 38.9759608,
-          "lat": 45.0131814
-        },
-        {
-          "lon": 38.9776893,
-          "lat": 45.0104546
-        },
-        {
-          "lon": 38.9840572,
-          "lat": 45.0103325
-        },
-        {
-          "lon": 38.9974512,
-          "lat": 45.0033296
-        },
-        {
-          "lon": 39.0116165,
-          "lat": 45.0025739
-        },
-        {
-          "lon": 39.0202445,
-          "lat": 44.98101
-        },
-        {
-          "lon": 39.0188039,
-          "lat": 44.9706469
-        },
-        {
-          "lon": 39.0232311,
-          "lat": 44.9675279
-        },
-        {
-          "lon": 39.0309381,
-          "lat": 44.9730113
-        },
-        {
-          "lon": 39.0339357,
-          "lat": 44.9800031
-        },
-        {
-          "lon": 39.0405858,
-          "lat": 44.984471
-        },
-        {
-          "lon": 39.0487187,
-          "lat": 44.9835481
-        },
-        {
-          "lon": 39.0572012,
-          "lat": 44.9753416
-        },
-        {
-          "lon": 39.0665326,
-          "lat": 44.9739292
-        },
-        {
-          "lon": 39.0670799,
-          "lat": 44.980387
-        },
-        {
-          "lon": 39.0766235,
-          "lat": 44.9879874
-        },
-        {
-          "lon": 39.0880578,
-          "lat": 44.9867288
-        },
-        {
-          "lon": 39.1006763,
-          "lat": 44.989708
-        },
-        {
-          "lon": 39.1150734,
-          "lat": 44.9996332
-        },
-        {
-          "lon": 39.1151381,
-          "lat": 45.0006966
-        },
-        {
-          "lon": 39.1156077,
-          "lat": 45.0062211
-        },
-        {
-          "lon": 39.1175829,
-          "lat": 45.0108106
-        },
-        {
-          "lon": 39.1223912,
-          "lat": 45.0176451
-        },
-        {
-          "lon": 39.126578,
-          "lat": 45.0234176
-        },
-        {
-          "lon": 39.1295515,
-          "lat": 45.0276839
-        },
-        {
-          "lon": 39.1302077,
-          "lat": 45.0291597
-        },
-        {
-          "lon": 39.1288905,
-          "lat": 45.0352003
-        },
-        {
-          "lon": 39.1282104,
-          "lat": 45.038213
-        },
-        {
-          "lon": 39.128174,
-          "lat": 45.0419687
-        },
-        {
-          "lon": 39.1286216,
-          "lat": 45.0448812
-        },
-        {
-          "lon": 39.126505,
-          "lat": 45.0448298
-        },
-        {
-          "lon": 39.1228295,
-          "lat": 45.0447419
-        },
-        {
-          "lon": 39.1184084,
-          "lat": 45.0445933
-        },
-        {
-          "lon": 39.1174747,
-          "lat": 45.0445277
-        },
-        {
-          "lon": 39.1160798,
-          "lat": 45.04439
-        },
-        {
-          "lon": 39.1139872,
-          "lat": 45.0441754
-        },
-        {
-          "lon": 39.0724902,
-          "lat": 45.0398483
-        },
-        {
-          "lon": 39.0520875,
-          "lat": 45.037755
-        },
-        {
-          "lon": 39.0404276,
-          "lat": 45.0365401
-        },
-        {
-          "lon": 39.0328665,
-          "lat": 45.0357565
-        }
-      ]
-    ],
-    "uuid": "12123123-1234-1234-1234-123123123213",
-    "express_delivery": false,
-    "min_order_amount": 1000,
-    "min_first_order_amount": 1000,
-    "min_order_amount_pickup": 0,
-    "min_first_order_amount_pickup": 0,
-    "available_for_pickup": false,
-    "retailer": {
-      "id": 15,
-      "name": "Ашан",
-      "slug": "auchan",
-      "color": "#d32c22",
-      "logo_background_color": "#ffffff",
-      "logo": "https://sbermarket.ru/spree/retailer_logos/110302/default/auchan-logo.png?1539666604",
-      "available": true,
-      "environment": null
+  "stores": [
+    {
+      "id": 116,
+      "name": "METRO, Краснодар, Крылатая",
+      "zones": [
+        [
+          {
+            "lon": 39.0090623,
+            "lat": 45.0043232
+          },
+          {
+            "lon": 39.0105077,
+            "lat": 45.0035377
+          }
+        ]
+      ],
+      "uuid": "32347db4-51e9-4160-b01d-f63d7517d917",
+      "express_delivery": false,
+      "min_order_amount": 1000,
+      "min_first_order_amount": 1000,
+      "min_order_amount_pickup": 500,
+      "min_first_order_amount_pickup": 500,
+      "available_for_pickup": true,
+      "retailer": {
+        "id": 1,
+        "name": "METRO",
+        "slug": "metro",
+        "color": "#002d72",
+        "logo_background_color": "#002d72",
+        "logo": "https://sbermarket.ru/spree/retailer_logos/97198/default/metro_logo.png?1524229580",
+        "available": true,
+        "environment": "production"
+      },
+      "location": {
+        "id": 14634860,
+        "full_address": "Краснодар, Краснодар, Крылатая, 2А",
+        "city": "Краснодар",
+        "street": "Краснодар, Крылатая",
+        "building": "2А",
+        "lat": 45.012469,
+        "lon": 39.12742
+      },
+      "next_delivery": {
+        "id": 2297828,
+        "price": 0,
+        "summary": "завтра, 10:00-12:00",
+        "starts_at": "2020-10-12T10:00:00.000+03:00",
+        "ends_at": "2020-10-12T12:00:00.000+03:00"
+      },
+      "services": []
     },
-    "location": {
-      "id": 14637619,
-      "full_address": "Краснодар, Краснодар, ул. Уральская, д. 79",
-      "city": "Краснодар",
-      "street": "Краснодар, ул. Уральская",
-      "building": "д. 79",
-      "lat": 45.03405155,
-      "lon": 39.05009094
+    {
+      "id": 251,
+      "name": "Ашан, Краснодар, ул. Уральская",
+      "zones": [
+        [
+          {
+            "lon": 39.0328665,
+            "lat": 45.0357565
+          },
+          {
+            "lon": 39.0315059,
+            "lat": 45.035491
+          }
+        ]
+      ],
+      "uuid": "d97f6e89-e833-458a-8e74-a67ba1727bf5",
+      "express_delivery": false,
+      "min_order_amount": 1000,
+      "min_first_order_amount": 1000,
+      "min_order_amount_pickup": 0,
+      "min_first_order_amount_pickup": 0,
+      "available_for_pickup": false,
+      "retailer": {
+        "id": 15,
+        "name": "Ашан",
+        "slug": "auchan",
+        "color": "#d32c22",
+        "logo_background_color": "#ffffff",
+        "logo": "https://sbermarket.ru/spree/retailer_logos/110302/default/auchan-logo.png?1539666604",
+        "available": true,
+        "environment": null
+      },
+      "location": {
+        "id": 14637619,
+        "full_address": "Краснодар, Краснодар, ул. Уральская, д. 79",
+        "city": "Краснодар",
+        "street": "Краснодар, ул. Уральская",
+        "building": "д. 79",
+        "lat": 45.03405155,
+        "lon": 39.05009094
+      },
+      "next_delivery": {
+        "id": 2300175,
+        "price": 0,
+        "summary": "завтра, 09:00-11:00",
+        "starts_at": "2020-10-12T09:00:00.000+03:00",
+        "ends_at": "2020-10-12T11:00:00.000+03:00"
+      },
+      "services": []
     },
-    "next_delivery": {
-      "id": 2286141,
-      "price": 98,
-      "summary": "завтра, 09:00-11:00",
-      "starts_at": "2020-10-11T09:00:00.000+03:00",
-      "ends_at": "2020-10-11T11:00:00.000+03:00"
+    {
+      "id": 139,
+      "name": "Лента, Краснодар, ул. Восточный Обход",
+      "zones": [
+        [
+          {
+            "lon": 39.009062,
+            "lat": 45.004323
+          },
+          {
+            "lon": 39.010508,
+            "lat": 45.003538
+          }
+        ]
+      ],
+      "uuid": "08efe9d9-a365-43d9-a075-535407614743",
+      "express_delivery": false,
+      "min_order_amount": 1000,
+      "min_first_order_amount": 1000,
+      "min_order_amount_pickup": 0,
+      "min_first_order_amount_pickup": 0,
+      "available_for_pickup": false,
+      "retailer": {
+        "id": 8,
+        "name": "Лента",
+        "slug": "lenta",
+        "color": "#053490",
+        "logo_background_color": "#053490",
+        "logo": "https://sbermarket.ru/spree/retailer_logos/86856/default/lenta.png?1513271434",
+        "available": true,
+        "environment": "development"
+      },
+      "location": {
+        "id": 14641991,
+        "full_address": "Краснодар, Краснодар, ул. Восточный Обход, 19",
+        "city": "Краснодар",
+        "street": "Краснодар, ул. Восточный Обход",
+        "building": "19",
+        "lat": 45.037746,
+        "lon": 39.126618
+      },
+      "next_delivery": {
+        "id": 2298382,
+        "price": 0,
+        "summary": "завтра, 09:00-11:00",
+        "starts_at": "2020-10-12T09:00:00.000+03:00",
+        "ends_at": "2020-10-12T11:00:00.000+03:00"
+      },
+      "services": []
     },
-    "services": [],
-    "operational_times": [
-      {
-        "week_day": "Понедельник",
-        "starts_at": "2020-10-05T09:00:00+03:00",
-        "ends_at": "2020-10-05T22:00:00+03:00"
+    {
+      "id": 455,
+      "name": "АГРОКОМПЛЕКС, Краснодар, ул. имени В.Н. Мачуги",
+      "zones": [
+        [
+          {
+            "lon": 39.009062,
+            "lat": 45.004323
+          },
+          {
+            "lon": 39.010508,
+            "lat": 45.003538
+          }
+        ]
+      ],
+      "uuid": "f44664bd-f70a-4129-8260-a41ecc13fa99",
+      "express_delivery": false,
+      "min_order_amount": 1000,
+      "min_first_order_amount": 1000,
+      "min_order_amount_pickup": 0,
+      "min_first_order_amount_pickup": 0,
+      "available_for_pickup": false,
+      "retailer": {
+        "id": 51,
+        "name": "АГРОКОМПЛЕКС",
+        "slug": "agrokompleks",
+        "color": "#023b0b",
+        "logo_background_color": "#023b0b",
+        "logo": "https://sbermarket.ru/spree/retailer_logos/320026/default/%D0%BB%D0%BE%D0%B3%D0%BE_%D0%90%D0%B3%D1%80%D0%BE%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81-01.png?1594404061",
+        "available": true,
+        "environment": null
       },
-      {
-        "week_day": "Вторник",
-        "starts_at": "2020-10-06T09:00:00+03:00",
-        "ends_at": "2020-10-06T22:00:00+03:00"
+      "location": {
+        "id": 14659175,
+        "full_address": "Краснодар, Краснодар, ул. имени В.Н. Мачуги, д. 76",
+        "city": "Краснодар",
+        "street": "Краснодар, ул. имени В.Н. Мачуги",
+        "building": "д. 76",
+        "lat": 45.01226815,
+        "lon": 39.07776296
       },
-      {
-        "week_day": "Среда",
-        "starts_at": "2020-10-07T09:00:00+03:00",
-        "ends_at": "2020-10-07T22:00:00+03:00"
+      "next_delivery": {
+        "id": 2302947,
+        "price": 0,
+        "summary": "завтра, 12:00-14:00",
+        "starts_at": "2020-10-12T12:00:00.000+03:00",
+        "ends_at": "2020-10-12T14:00:00.000+03:00"
       },
-      {
-        "week_day": "Четверг",
-        "starts_at": "2020-10-08T09:00:00+03:00",
-        "ends_at": "2020-10-08T22:00:00+03:00"
-      },
-      {
-        "week_day": "Пятница",
-        "starts_at": "2020-10-09T09:00:00+03:00",
-        "ends_at": "2020-10-09T22:00:00+03:00"
-      },
-      {
-        "week_day": "Суббота",
-        "starts_at": "2020-10-10T09:00:00+03:00",
-        "ends_at": "2020-10-10T22:00:00+03:00"
-      },
-      {
-        "week_day": "Воскресенье",
-        "starts_at": "2020-10-11T09:00:00+03:00",
-        "ends_at": "2020-10-11T22:00:00+03:00"
-      }
-    ]
-  }
+      "services": []
+    }
+  ]
 }
 ```

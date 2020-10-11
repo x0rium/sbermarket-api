@@ -1,6 +1,6 @@
 ### Добавление товара в корзину
 POST `line_items`
-
+DELETE line_items/193322744 HTTP/1.1
 Body:
 ```
 line_item[order_number]=R*********
@@ -8,7 +8,7 @@ line_item[product_id]=251061935
 line_item[quantity]=1
 ```
 
-```JSON 
+```JSON
 {
   "line_item": {
     "id": 193341307,

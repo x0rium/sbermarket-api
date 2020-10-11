@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "nodemon --watch './**/*.ts' --exec \"ts-node\" example/index.ts",
     "build": "tsc -p .",
-    "test": "echo \"tests should be here\""
+    "test": "echo \"tests should be here\"",
+    "generateDocs": "typedoc --out docs/api src"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
