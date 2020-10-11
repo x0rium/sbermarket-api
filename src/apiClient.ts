@@ -9,6 +9,8 @@ import formData from "form-data";
 import { User } from "user";
 import { Store } from "store";
 import { Session } from "session";
+import { Credentials } from "credentials";
+import { Order } from "order";
 
 enum apiClientMethods {
   GET = "GET",
@@ -19,15 +21,14 @@ class ApiClient {
   _axiosInstance: AxiosInstance = null;
   session: Session;
 
-  constructor() {
-    dotenv.config();
+  constructor(public credentials: Credentials) {
     this.init();
   }
 
   private init() {
     this._axiosInstance = axios.create(axiosConfig);
     this._axiosInstance.interceptors.request.use((config) => {
-      return onRequestFulfilled(config, this.session || null);
+      return onRequestFulfilled(config, this.session || null, this.credentials);
     }, onRequestRejected);
     this._axiosInstance.interceptors.response.use((response) => {
       return response;
@@ -55,9 +56,8 @@ class ApiClient {
    * Получение данных о юзере
    */
   public async getUser(): Promise<{ user: User }> {
-    const email = process.env.email;
     return await this._req<{ user: User }>(
-      `users/${email}`,
+      `users/${this.credentials.email}`,
       apiClientMethods.GET,
       {}
     );
@@ -78,8 +78,12 @@ class ApiClient {
   /**
    * Получить текущий заказ/корзину
    */
-  public async getCurrentOrder() {
-    return await this._req("orders/current", apiClientMethods.GET, {});
+  public async getCurrentOrder(): Promise<{ order: Order }> {
+    return await this._req<{ order: Order }>(
+      "orders/current",
+      apiClientMethods.GET,
+      {}
+    );
   }
 
   /**
@@ -161,4 +165,4 @@ class ApiClient {
   }
 }
 
-export default new ApiClient();
+export default ApiClient;

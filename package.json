@@ -7,7 +7,7 @@
   "author": "x0rium <tuxera@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "npm run build:live",
+    "dev": "nodemon --watch './**/*.ts' --exec \"ts-node\" example/index.ts",
     "build": "tsc -p .",
     "test": "echo \"tests should be here\""
   },

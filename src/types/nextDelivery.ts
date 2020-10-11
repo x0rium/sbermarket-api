@@ -22,4 +22,6 @@ export interface NextDelivery {
    * ends_at: время окончания доставки
    */
   ends_at: string;
+
+  kind?: unknown;
 }

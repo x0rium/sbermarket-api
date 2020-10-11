@@ -1,12 +1,17 @@
 import * as axios from "axios";
 import formData from "form-data";
 import { Session } from "session";
+import { Credentials } from "credentials";
 
-export default (config: axios.AxiosRequestConfig, session: Session = null) => {
+export default (
+  config: axios.AxiosRequestConfig,
+  session: Session = null,
+  credentials: Credentials
+) => {
   if (config.url === "sessions") {
     config.auth = {
-      username: process.env.email,
-      password: process.env.password,
+      username: credentials.email,
+      password: credentials.password,
     };
   }
   if (session && session.access_token) {
