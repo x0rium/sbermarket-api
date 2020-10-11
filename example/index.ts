@@ -1,5 +1,4 @@
 import sbermarketApi from "../src/apiClient";
-import logger from "../src/logger";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -11,14 +10,14 @@ const apiClient = new sbermarketApi(credentials);
 apiClient.login().then((isValid) => {
   if (!isValid) return false;
   apiClient.getUser().then((data) => {
-    logger.info(data);
+    console.log(data);
   });
 
   apiClient.getCurrentOrder().then((data) => {
-    logger.info(data);
+    console.log(data);
   });
 
   apiClient.getStore(251).then((data) => {
-    logger.info(data.store.location);
+    console.log(data.store.location);
   });
 });
