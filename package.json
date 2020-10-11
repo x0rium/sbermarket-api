@@ -1,6 +1,6 @@
 {
   "name": "sbermarket-api",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "dist/apiClient.js",
   "repository": "https://github.com/x0rium/sbermarket-api.git",
   "homepage": "https://github.com/x0rium/sbermarket-api/blob/master/README.md",
