@@ -8,8 +8,12 @@
 
 *WARNING! Under construction.*
 
+### Установка
+```npm i sbermarket-api```
+ или
+```yarn add sbermarket-api```
+
 ### Использование
-0. Установить пакет `npm i sbermarket-api` или `yarn add sbermarket-api`
 1. Необходимо передать два параметра `email` и `password`
 3. Примеры выполнения кода можно найти в папке `example`
 
