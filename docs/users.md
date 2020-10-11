@@ -23,3 +23,5 @@ GET https://api.sbermarket.ru/v2/users/asd%asd.com HTTP/1.1
   }
 }
 ```
+
+interface User in user.ts

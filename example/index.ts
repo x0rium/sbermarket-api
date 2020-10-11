@@ -6,8 +6,12 @@ apiClient.login().then((isValid) => {
   apiClient.getUser().then((data) => {
     logger.info(data);
   });
+  //
+  // apiClient.getCurrentOrder().then((data) => {
+  //   logger.info(data);
+  // });
 
-  apiClient.getCurrentOrder().then((data) => {
-    logger.info(data);
+  apiClient.getStore(251).then((data) => {
+    logger.info(data.store.location);
   });
 });

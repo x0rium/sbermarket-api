@@ -1,19 +1,23 @@
 import { axiosConfig } from "./axiosConfig";
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import logger from "./logger";
 import * as dotenv from "dotenv";
 import onRequestFulfilled from "./middlewares/onRequestFulfilled";
 import onRequestRejected from "./middlewares/onRequestRejected";
 import onResponseRejected from "./middlewares/onResponseRejected";
-import * as formData from "form-data";
+import formData from "form-data";
+import { User } from "user";
+import { Store } from "store";
+import { Session } from "session";
+
+enum apiClientMethods {
+  GET = "GET",
+  POST = "POST",
+}
 
 class ApiClient {
-  _axiosInstance;
-  session: {
-    access_token: string;
-    expires_at: string;
-    is_valid: boolean;
-  };
+  _axiosInstance: AxiosInstance = null;
+  session: Session;
 
   constructor() {
     dotenv.config();
@@ -35,7 +39,11 @@ class ApiClient {
    * @return Boolean - if is valid return true, else false
    */
   async login(): Promise<Boolean> {
-    const resp = await this._req("sessions", "POST", {});
+    const resp = await this._req<{ session: Session }>(
+      "sessions",
+      apiClientMethods.POST,
+      {}
+    );
     if (resp.session) {
       this.session = resp.session;
       return true;
@@ -43,27 +51,64 @@ class ApiClient {
     throw "Problem with session, access token not valid, on login action";
   }
 
-  public async getUser() {
+  /**
+   * Получение данных о юзере
+   */
+  public async getUser(): Promise<{ user: User }> {
     const email = process.env.email;
-    return await this._req(`users/${email}`, "GET", {});
+    return await this._req<{ user: User }>(
+      `users/${email}`,
+      apiClientMethods.GET,
+      {}
+    );
   }
 
-  public async getStore(storeId: number) {
-    return await this._req(`stores/${storeId}`, "GET", {});
+  /**
+   * Получение данных о магазине
+   * @param storeId
+   */
+  public async getStore(storeId: number): Promise<{ store: Store }> {
+    return await this._req<{ store: Store }>(
+      `stores/${storeId}`,
+      apiClientMethods.GET,
+      {}
+    );
   }
 
+  /**
+   * Получить текущий заказ/корзину
+   */
   public async getCurrentOrder() {
-    return await this._req("orders/current", "GET", {});
+    return await this._req("orders/current", apiClientMethods.GET, {});
   }
 
-  public async getCategory(taxonId: number, storeId: number) {
-    return await this._req(`taxons/${taxonId}?sid=${storeId}`, "GET", {});
+  /**
+   * Получить список продуктов в категории
+   * @param taxonId
+   * @param storeId
+   */
+  public async getCategoryProducts(taxonId: number, storeId: number) {
+    return await this._req(
+      `taxons/${taxonId}?sid=${storeId}`,
+      apiClientMethods.GET,
+      {}
+    );
   }
 
+  /**
+   * Получить информацию о товаре
+   * @param productId
+   */
   public async getProduct(productId: number) {
-    return await this._req(`products/${productId}`, "GET", {});
+    return await this._req(`products/${productId}`, apiClientMethods.GET, {});
   }
 
+  /**
+   * Добавить товар в заказ/корзину
+   * @param orderNumber
+   * @param productId
+   * @param quantity
+   */
   public async addToOrder(
     orderNumber: string,
     productId: number,
@@ -73,18 +118,36 @@ class ApiClient {
     form.append("line_item[order_number]", orderNumber);
     form.append("line_item[product_id]", productId);
     form.append("line_item[quantity]", quantity);
-    return await this._req(`line_items`, "POST", form);
+    return await this._req(`line_items`, apiClientMethods.POST, form);
   }
 
-  public async search(storeId, query: string, perPage = 20, page = 1) {
+  /**
+   * Искать по товарам/ категориям с пагинацией
+   * @param storeId - id магазина
+   * @param query - поисковый запрос
+   * @param perPage - количество продуктов на одной странице
+   * @param page - номер страницы
+   */
+  public async search(storeId: number, query: string, perPage = 20, page = 1) {
     return await this._req(
       `products?page=${page}&per_page=${perPage}&q=${query}&sid=${storeId}`,
-      "GET",
+      apiClientMethods.GET,
       {}
     );
   }
 
-  private async _req(url, method, data) {
+  /**
+   * Метод выполняет запрос к api sbermarket
+   * @param url - конкретный адрес для запроса
+   * @param method -
+   * @param data
+   * @private
+   */
+  private async _req<T>(
+    url: string,
+    method: apiClientMethods,
+    data: object
+  ): Promise<T> {
     try {
       const response = await this._axiosInstance({ method, url, data });
       if (response.status === 200) {
@@ -92,7 +155,7 @@ class ApiClient {
         return response.data;
       }
     } catch (e) {
-      logger.info(`${method} :: ${url}=> `, e);
+      logger.error(`${method} :: ${url}=> `, e);
       return Promise.reject(e);
     }
   }

@@ -1,4 +1,4 @@
-## Описание поставщика
+## Описание поставщика / магазина
 GET https://api.sbermarket.ru/v2/stores/251
 
 ```JSON

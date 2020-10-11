@@ -1,6 +1,8 @@
 import * as axios from "axios";
-import * as formData from "form-data";
-export default (config: axios.AxiosRequestConfig, session = null) => {
+import formData from "form-data";
+import { Session } from "session";
+
+export default (config: axios.AxiosRequestConfig, session: Session = null) => {
   if (config.url === "sessions") {
     config.auth = {
       username: process.env.email,
