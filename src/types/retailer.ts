@@ -1,7 +1,7 @@
 /**
  * Retailer: айдентика поставщика/ магазина
  */
-export type Retailer = {
+export interface Retailer {
   /**
    * id: уникальный id ретейлера в системе
    */
@@ -39,4 +39,4 @@ export type Retailer = {
     url: string;
   };
   environment: null | unknown;
-};
+}

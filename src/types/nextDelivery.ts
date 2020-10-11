@@ -1,7 +1,7 @@
 /**
  * NextDelivery: информация о следующей доставке
  */
-export type NextDelivery = {
+export interface NextDelivery {
   /**
    * id: уникальный id предложения о доставке
    */
@@ -22,4 +22,4 @@ export type NextDelivery = {
    * ends_at: время окончания доставки
    */
   ends_at: string;
-};
+}

@@ -1,7 +1,7 @@
 /**
  * Location: информация о расположении магазина
  */
-export type Location = {
+export interface Location {
   /**
    * id: уникальный id локации
    */
@@ -30,4 +30,4 @@ export type Location = {
    * lon: долгота
    */
   lon: number;
-};
+}
