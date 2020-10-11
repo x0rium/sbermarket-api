@@ -57,7 +57,7 @@ GET `products/{{productId}}`
 Смотри подробнее в [./docs/product.md](./docs/product.md)
 
 
-### Добавление товара в корзину
+### Добавление товара в корзину +
 POST `line_items`
 
 addToOrder(номер заказа, id продукта, количество)
@@ -65,7 +65,7 @@ addToOrder(номер заказа, id продукта, количество)
 Смотри подробнее в [./docs/line_items.md](./docs/line_items.md)
 
 
-### Поиск товара
+### Поиск товара +
 GET `products?page=1&per_page=20&q=%D0%92%D0%BE%D0%B4%D0%BA%D0%B0&sid={{storeId}}`
 
 Смотри подробнее в [./docs/products.md](./docs/products.md)
