@@ -9,13 +9,14 @@
 *WARNING! Under construction.*
 
 ### Использование
-1. Необходимо в env передать два параметра `email` и `password`, пример можно посмотреть в `.env.example`
-2. Для установки зависимостей запустить `yarn`
+0. Установить пакет `npm i sbermarket-api` или `yarn add sbermarket-api`
+1. Необходимо передать два параметра `email` и `password`
 3. Примеры выполнения кода можно найти в папке `example`
 
 ```JavaScript
 
-import apiClient from "../src/apiClient";
+const sbermarketApi= require("sbermarket-api");
+const apiClient = new sbermarketApi({email:"asd.asd@asd.asd",password:"asdasd123"})
 
 // логинимся
 apiClient.login().then((isValid) => {
@@ -37,8 +38,6 @@ apiClient.login().then((isValid) => {
   });
 
 });
-
-
 ```
 
 
@@ -112,8 +111,8 @@ GET `products?page=1&per_page=20&q=%D0%92%D0%BE%D0%B4%D0%BA%D0%B0&sid={{storeId}
 ##TODO:
 - [ ] выровнять readme.md
 - [ ] получение доступных магазинов
-- [ ] кэшировавние дерева
-- [ ] кэшировавние токена
+- [ ] кэширование дерева
+- [ ] кэширование токена
 - [ ] эмуляция гео
 - [ ] типизировать все запросы
 - [x] поиск товаров и категорий
