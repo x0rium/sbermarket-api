@@ -186,7 +186,7 @@ baseUrl : `https://api.sbermarket.ru/v2/`
 3. `perPage` - количество продуктов на одной странице;
 4. `page` - номер страницы, отсчет от 1;
 ```JavaScript
- apiClient.removeFromOrder(1231231).then((data) => {
+ apiClient.search(251,"Кошкина радость",20,1).then((data) => {
     console.log(data);
  });
 ```
