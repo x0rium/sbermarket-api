@@ -76,6 +76,14 @@ class ApiClient {
     return await this._req(`line_items`, "POST", form);
   }
 
+  public async search(storeId, query: string, perPage = 20, page = 1) {
+    return await this._req(
+      `products?page=${page}&per_page=${perPage}&q=${query}&sid=${storeId}`,
+      "GET",
+      {}
+    );
+  }
+
   private async _req(url, method, data) {
     try {
       const response = await this._axiosInstance({ method, url, data });
