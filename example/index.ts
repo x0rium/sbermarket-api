@@ -9,15 +9,18 @@ const credentials = {
 const apiClient = new sbermarketApi(credentials);
 apiClient.login().then((isValid) => {
   if (!isValid) return false;
-  apiClient.getUser().then((data) => {
+  // apiClient.getUser().then((data) => {
+  //   console.log(data);
+  // });
+  //
+  // apiClient.getCurrentOrder().then((data) => {
+  //   console.log(data);
+  // });
+  //
+  // apiClient.getStore(251).then((data) => {
+  //   console.log(data.store.location);
+  // });
+  apiClient.search(251, "икра").then((data) => {
     console.log(data);
-  });
-
-  apiClient.getCurrentOrder().then((data) => {
-    console.log(data);
-  });
-
-  apiClient.getStore(251).then((data) => {
-    console.log(data.store.location);
   });
 });

@@ -1,7 +1,6 @@
 import { axiosConfig } from "./axiosConfig";
 import axios, { AxiosInstance } from "axios";
 import logger from "./logger";
-import * as dotenv from "dotenv";
 import onRequestFulfilled from "./middlewares/onRequestFulfilled";
 import onRequestRejected from "./middlewares/onRequestRejected";
 import onResponseRejected from "./middlewares/onResponseRejected";
@@ -11,6 +10,9 @@ import { Store } from "store";
 import { Session } from "session";
 import { Credentials } from "credentials";
 import { Order } from "order";
+import { CurrentProduct } from "currentProduct";
+import { lineItem } from "lineItem";
+import { Products } from "products";
 
 enum apiClientMethods {
   GET = "GET",
@@ -91,8 +93,11 @@ class ApiClient {
    * @param taxonId
    * @param storeId
    */
-  public async getCategoryProducts(taxonId: number, storeId: number) {
-    return await this._req(
+  public async getCategoryProducts(
+    taxonId: number,
+    storeId: number
+  ): Promise<Products> {
+    return await this._req<Products>(
       `taxons/${taxonId}?sid=${storeId}`,
       apiClientMethods.GET,
       {}
@@ -103,8 +108,14 @@ class ApiClient {
    * Получить информацию о товаре
    * @param productId
    */
-  public async getProduct(productId: number) {
-    return await this._req(`products/${productId}`, apiClientMethods.GET, {});
+  public async getProduct(
+    productId: number
+  ): Promise<{ product: CurrentProduct }> {
+    return await this._req<{ product: CurrentProduct }>(
+      `products/${productId}`,
+      apiClientMethods.GET,
+      {}
+    );
   }
 
   /**
@@ -117,12 +128,16 @@ class ApiClient {
     orderNumber: string,
     productId: number,
     quantity: number = 1
-  ) {
+  ): Promise<{ line_item: lineItem }> {
     const form = new formData();
     form.append("line_item[order_number]", orderNumber);
     form.append("line_item[product_id]", productId);
     form.append("line_item[quantity]", quantity);
-    return await this._req(`line_items`, apiClientMethods.POST, form);
+    return await this._req<{ line_item: lineItem }>(
+      `line_items`,
+      apiClientMethods.POST,
+      form
+    );
   }
 
   /**
@@ -132,9 +147,16 @@ class ApiClient {
    * @param perPage - количество продуктов на одной странице
    * @param page - номер страницы
    */
-  public async search(storeId: number, query: string, perPage = 20, page = 1) {
-    return await this._req(
-      `products?page=${page}&per_page=${perPage}&q=${query}&sid=${storeId}`,
+  public async search(
+    storeId: number,
+    query: string,
+    perPage = 20,
+    page = 1
+  ): Promise<Products> {
+    return await this._req<Products>(
+      `products?page=${page}&per_page=${perPage}&q=${encodeURI(
+        query
+      )}&sid=${storeId}`,
       apiClientMethods.GET,
       {}
     );
