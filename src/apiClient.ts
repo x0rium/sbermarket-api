@@ -11,7 +11,7 @@ import { Session } from "session";
 import { Credentials } from "credentials";
 import { Order } from "order";
 import { CurrentProduct } from "currentProduct";
-import { lineItem } from "lineItem";
+import { LineItem } from "lineItem";
 import { Products } from "products";
 
 enum apiClientMethods {
@@ -128,12 +128,12 @@ class ApiClient {
     orderNumber: string,
     productId: number,
     quantity: number = 1
-  ): Promise<{ line_item: lineItem }> {
+  ): Promise<{ line_item: LineItem }> {
     const form = new formData();
     form.append("line_item[order_number]", orderNumber);
     form.append("line_item[product_id]", productId);
     form.append("line_item[quantity]", quantity);
-    return await this._req<{ line_item: lineItem }>(
+    return await this._req<{ line_item: LineItem }>(
       `line_items`,
       apiClientMethods.POST,
       form

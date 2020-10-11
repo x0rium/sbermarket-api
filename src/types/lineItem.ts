@@ -1,6 +1,6 @@
 import { Product } from "product";
 
-export interface lineItem {
+export interface LineItem {
   id: number;
   quantity: number;
   packs: number;
