@@ -1,14 +1,14 @@
 {
   "name": "sbermarket-tools",
   "version": "0.0.1",
-  "main": "index.js",
-  "repository": "https://github.com/x0rium/sbermarket-tools.git",
+  "main": "dist/apiClient.js",
+  "repository": "https://github.com/x0rium/sbermarket-api.git",
+  "homepage": "https://github.com/x0rium/sbermarket-api/blob/master/README.md",
   "author": "x0rium <tuxera@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "npm run build:live",
-    "build": "tsc -p .",
-    "build:live": "nodemon --watch './**/*.ts' --exec \"ts-node\" example/index.ts"
+    "dev": "npm run build:live",
+    "build": "tsc -p ."
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
@@ -31,5 +31,8 @@
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",
     "qs": "^6.9.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
