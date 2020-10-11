@@ -16,7 +16,7 @@
 ```JavaScript
 
 const sbermarketApi= require("sbermarket-api");
-const apiClient = new sbermarketApi({email:"asd.asd@asd.asd",password:"asdasd123"})
+const apiClient = new sbermarketApi({email:"asd.asd@asd.asd", password:"asdasd123"});
 
 // логинимся
 apiClient.login().then((isValid) => {
