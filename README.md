@@ -59,7 +59,7 @@ GET `users/{{email}}`
 
 Смотри подробнее в [./docs/users.md](./docs/users.md)
 
-### Описание поставщика +
+### Описание поставщика
 GET `stores/{{storeId}}`
 
 Название метода: `getStore()`
@@ -68,7 +68,7 @@ GET `stores/{{storeId}}`
 Смотри подробнее в [./docs/stores.md](./docs/stores.md)
 
 
-### Корзина +
+### Корзина
 GET `orders/current`
 
 Название метода: `getCurrentOrder()`
@@ -76,7 +76,7 @@ GET `orders/current`
 Смотри подробнее в [./docs/currentOrder.md](./docs/currentOrder.md)
 
 
-### Получение категории +
+### Получение категории
 GET `taxons/{{taxonId}}?sid={{storeId}}`
 
 Название метода: `getCategory()`
@@ -84,7 +84,7 @@ GET `taxons/{{taxonId}}?sid={{storeId}}`
 Смотри подробнее в [./docs/taxons.md](./docs/taxons.md)
 
 
-### Получение товара +
+### Получение товара
 GET `products/{{productId}}`
 
 Название метода: `getProduct()`
@@ -92,7 +92,7 @@ GET `products/{{productId}}`
 Смотри подробнее в [./docs/product.md](./docs/product.md)
 
 
-### Добавление товара в корзину +
+### Добавление товара в корзину
 POST `line_items`
 
 Название метода: `addToOrder(номер заказа, id продукта, количество)`
@@ -100,7 +100,7 @@ POST `line_items`
 Смотри подробнее в [./docs/line_items.md](./docs/line_items.md)
 
 
-### Поиск товара +
+### Поиск товара
 GET `products?page=1&per_page=20&q=%D0%92%D0%BE%D0%B4%D0%BA%D0%B0&sid={{storeId}}`
 
 Название метода: `search(id магазина, поисковый запрос, количество продуктов на страницу, номер страницы)`
