@@ -4,7 +4,42 @@
 - очень хочется  накидывать в корзину типовые товары быстро и без боли, прям скриптом)
 - поиск наилучших ценовых предложений по магазинам доступным в Сбермаркете
 
-К сожалению официального публичного api не нашлось.
+К сожалению, официального публичного api не нашлось. Саппорт тоже ничего по этому поводу не ответил.
+
+*WARNING! Under construction.*
+
+### Использование
+1. Необходимо в env передать два параметра `email` и `password`, пример можно посмотреть в `.env.example`
+2. Для установки зависимостей запустить `yarn`
+3. Примеры выполнения кода можно найти в папке `example`
+
+```JavaScript
+
+import apiClient from "../src/apiClient";
+
+// логинимся
+apiClient.login().then((isValid) => {
+  if (!isValid) return false;
+
+  // получить данные о текущем юзере
+  apiClient.getUser().then((data) => {
+    console.log(data);
+  });
+
+  // получить данные о текущем заказе, оно же корзина
+  apiClient.getCurrentOrder().then((data) => {
+    console.log(data);
+  });
+
+  // получить данные о магазине
+  apiClient.getStore(251).then((data) => {
+    console.log(data.store.location);
+  });
+
+});
+
+
+```
 
 
 ### Авторизация
@@ -17,17 +52,18 @@ POST https://api.sbermarket.ru/v2/sessions HTTP/1.1
 
 `baseUrl` : `https://api.sbermarket.ru/v2/`
 
-### Получение данных о юзере +
+
+### Получение данных о юзере
 GET `users/{{email}}`
 
-`getUser()`
+Название метода: `getUser()`
 
 Смотри подробнее в [./docs/users.md](./docs/users.md)
 
 ### Описание поставщика +
 GET `stores/{{storeId}}`
 
-`getStore()`
+Название метода: `getStore()`
 
 
 Смотри подробнее в [./docs/stores.md](./docs/stores.md)
@@ -36,7 +72,7 @@ GET `stores/{{storeId}}`
 ### Корзина +
 GET `orders/current`
 
-`getCurrentOrder()`
+Название метода: `getCurrentOrder()`
 
 Смотри подробнее в [./docs/currentOrder.md](./docs/currentOrder.md)
 
@@ -44,7 +80,7 @@ GET `orders/current`
 ### Получение категории +
 GET `taxons/{{taxonId}}?sid={{storeId}}`
 
-`getCategory()`
+Название метода: `getCategory()`
 
 Смотри подробнее в [./docs/taxons.md](./docs/taxons.md)
 
@@ -52,7 +88,7 @@ GET `taxons/{{taxonId}}?sid={{storeId}}`
 ### Получение товара +
 GET `products/{{productId}}`
 
-`getProduct()`
+Название метода: `getProduct()`
 
 Смотри подробнее в [./docs/product.md](./docs/product.md)
 
@@ -60,13 +96,15 @@ GET `products/{{productId}}`
 ### Добавление товара в корзину +
 POST `line_items`
 
-addToOrder(номер заказа, id продукта, количество)
+Название метода: `addToOrder(номер заказа, id продукта, количество)`
 
 Смотри подробнее в [./docs/line_items.md](./docs/line_items.md)
 
 
 ### Поиск товара +
 GET `products?page=1&per_page=20&q=%D0%92%D0%BE%D0%B4%D0%BA%D0%B0&sid={{storeId}}`
+
+Название метода: `search(id магазина, поисковый запрос, количество продуктов на страницу, номер страницы)`
 
 Смотри подробнее в [./docs/products.md](./docs/products.md)
 
@@ -77,7 +115,9 @@ GET `products?page=1&per_page=20&q=%D0%92%D0%BE%D0%B4%D0%BA%D0%B0&sid={{storeId}
 - [ ] кэшировавние дерева
 - [ ] кэшировавние токена
 - [ ] эмуляция гео
+- [ ] типизировать все запросы
 - [x] поиск товаров и категорий
+- [ ] тесты
 
 
 ## Disclaimer
