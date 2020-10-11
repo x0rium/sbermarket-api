@@ -41,6 +41,11 @@ apiClient.login().then((isValid) => {
     console.log(data.store.location);
   });
 
+  apiClient.search(251, "икра путина").then((data) => {
+    console.log(data);
+  });
+
+
 });
 ```
 
